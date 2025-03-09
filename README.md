@@ -84,6 +84,43 @@ null和undefined的区别：Nan代表一个计算错误。它是一个不正确�
 console.dir()
 ```
 
+## "method（方法）"和"function（函数）"
+
+在JavaScript中，"method"（方法）和"function"（函数）这两个术语经常被使用，它们之间的区别主要在于它们的定义和上下文中的使用方式。
+
+**Function（函数）:**
+- 函数是一个独立的代码块，它可以通过名称被调用，执行特定的任务。
+- 函数可以接受输入参数，并且可以返回一个值。
+- 函数可以在全局作用域中定义，也可以在其它函数内部定义（称为嵌套函数或局部函数）。
+- 函数不依赖于任何对象，它可以独立存在。
+
+示例：
+```javascript
+function add(a, b) {
+    return a + b;
+}
+```
+
+**Method（方法）:**
+
+- 方法是与对象关联的函数。它是作为对象属性的函数。
+- 方法通常用于操作对象内部的数据或执行与对象相关的操作。
+- 方法可以访问和修改对象的状态（即对象的属性）。
+- 方法需要通过对象来调用，通常使用点符号（例如`object.method()`）。
+
+示例：
+```javascript
+let calculator = {
+    add: function(a, b) {
+        return a + b;
+    }
+};
+
+calculator.add(2, 3); // 调用方法
+```
+
+总结来说，所有的method都是function，但不是所有的function都是method。当一个function作为对象的一个属性时，我们通常称它为method。在面向对象编程中，方法通常用于描述对象的行为。
+
 # 2、WEB APIs
 
 ## 2.1、声明变量const优先
