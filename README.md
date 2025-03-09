@@ -89,6 +89,7 @@ console.dir()
 在JavaScript中，"method"（方法）和"function"（函数）这两个术语经常被使用，它们之间的区别主要在于它们的定义和上下文中的使用方式。
 
 **Function（函数）:**
+
 - 函数是一个独立的代码块，它可以通过名称被调用，执行特定的任务。
 - 函数可以接受输入参数，并且可以返回一个值。
 - 函数可以在全局作用域中定义，也可以在其它函数内部定义（称为嵌套函数或局部函数）。
@@ -120,6 +121,83 @@ calculator.add(2, 3); // 调用方法
 ```
 
 总结来说，所有的method都是function，但不是所有的function都是method。当一个function作为对象的一个属性时，我们通常称它为method。在面向对象编程中，方法通常用于描述对象的行为。
+
+## 定义类方法的不同方式
+
+在JavaScript中，可以通过两种方式在类中定义方法：一种是在类的构造函数中通过属性定义方法，另一种是通过类的原型定义方法。这两种方式在功能上都可以实现方法的定义，但它们之间存在一些重要的区别。
+
+### 1. 在类的构造函数中通过属性定义方法
+```javascript
+class MyClass {
+    constructor() {
+        this.myMethod = function() {
+            console.log('Method defined in constructor');
+        };
+    }
+}
+```
+
+**特点：**
+- 每次创建类的实例时，都会重新定义这个方法。也就是说，每个实例都会有自己的方法副本。
+- 这种方法会占用更多的内存，因为每个实例都有自己的方法副本。
+- 适用于需要在每个实例中维护独立状态的方法。
+
+### 2. 通过类的原型定义方法
+```javascript
+class MyClass {
+    myMethod() {
+        console.log('Method defined on prototype');
+    }
+}
+```
+
+**特点：**
+- 方法定义在类的原型上，所有实例共享同一个方法。
+- 这种方法更节省内存，因为所有实例都共享同一个方法副本。
+- 适用于不需要在每个实例中维护独立状态的方法。
+
+### 区别总结
+
+| 特性             | 构造函数中定义方法                       | 原型中定义方法                       |
+| ---------------- | ---------------------------------------- | ------------------------------------ |
+| **内存占用**     | 每个实例都有自己的方法副本，占用更多内存 | 所有实例共享同一个方法副本，节省内存 |
+| **适用场景**     | 需要在每个实例中维护独立状态的方法       | 不需要在每个实例中维护独立状态的方法 |
+| **方法定义位置** | 定义在实例上                             | 定义在原型上                         |
+| **方法共享**     | 不共享，每个实例独立                     | 共享，所有实例共享同一个方法         |
+
+### 示例代码
+
+```javascript
+// 在构造函数中定义方法
+class MyClass1 {
+    constructor() {
+        this.myMethod = function() {
+            console.log('Method defined in constructor');
+        };
+    }
+}
+
+let instance1 = new MyClass1();
+let instance2 = new MyClass1();
+console.log(instance1.myMethod === instance2.myMethod); // false
+
+// 在原型中定义方法
+class MyClass2 {
+    myMethod() {
+        console.log('Method defined on prototype');
+    }
+}
+
+let instance3 = new MyClass2();
+let instance4 = new MyClass2();
+console.log(instance3.myMethod === instance4.myMethod); // true
+```
+
+### 结论
+- 如果你需要每个实例都有自己独立的方法副本，可以在构造函数中定义方法。
+- 如果你希望所有实例共享同一个方法副本以节省内存，可以在原型中定义方法。
+
+通常情况下，推荐使用原型定义方法，因为它更节省内存且更符合JavaScript的原型继承机制。
 
 # 2、WEB APIs
 
